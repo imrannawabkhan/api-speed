@@ -127,6 +127,63 @@ Change the default port under project > Properties > launchSettings.json
 Open your browser and point it to the server IP and port:
 http://localhost:3002/api/hello
 
+### NestJs Example:
+
+```bash
+$ npx @nestjs/cli new webapi-nest
+$ npx @nestjs/cli generate controller hello
+```
+
+Open the generated hello.controller.ts file located in the "src" directory
+```javascript
+// src/hello.controller.ts
+import { Controller, Get } from '@nestjs/common';
+
+@Controller('api/hello')
+export class HelloController {
+    @Get()
+    getHello():{ message: string } {
+        return { message: 'Hello World! From Nest Js' };
+    }
+}
+```
+
+Changes the in src > app.module.ts 
+```javascript
+import { Module } from '@nestjs/common';
+import { HelloController } from './app.controller';
+import { AppService } from './app.service';
+
+@Module({
+  imports: [],
+  controllers: [HelloController],
+  providers: [AppService],
+})
+export class AppModule {}
+
+```
+Change the default port under src > main.ts
+```javascript
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(3003);
+}
+bootstrap();
+
+```
+
+Start NestJs Server
+
+```bash
+$ npm run start
+```
+
+Open your browser and point it to the server IP and port:
+http://localhost:3003/api/hello
+
 ### Start the Monitor:
 NodeJs
 ```bash
@@ -141,6 +198,11 @@ NextJs
 Asp.Net Core
 ```bash
 ./node_modules/.bin/autocannon http://localhost:3002/api/hello
+```
+
+NestJs
+```bash
+./node_modules/.bin/autocannon http://localhost:3003/api/hello
 ```
 
 ## License 
