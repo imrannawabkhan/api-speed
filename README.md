@@ -36,14 +36,14 @@ app.listen(port, () => {
 });
 ```
 
-Open your browser and point it to the server (where server.js is started) IP and port:
-http://localhost:3000/api/hello
-
 Start NodeJs Server
 
 ```bash
 $ node app.js
 ```
+
+Open your browser and point it to the server (where server.js is started) IP and port:
+http://localhost:3000/api/hello
 
 ### NextJs Example:
 
